@@ -1,0 +1,29 @@
+.control {
+  @apply absolute bottom-10 right-10 flex flex-row
+   z-30 shadow-xl select-none rounded-sm;
+  height: 48px;
+}
+
+.leftControl,
+.rightControl {
+  @apply px-9 cursor-pointer border border-white rounded-l-md;
+  transition: background-color 0.2s ease;
+}
+
+.leftControl:hover,
+.rightControl:hover {
+  background-color: #25222a78;
+}
+
+.leftControl:focus,
+.rightControl:focus {
+  @apply outline-none;
+}
+
+.rightControl {
+  @apply border border-white rounded-none rounded-r-md;
+}
+
+.leftControl {
+  margin-right: -1px;
+}

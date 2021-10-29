@@ -1,0 +1,114 @@
+.root {
+  @apply relative max-h-full w-full box-border overflow-hidden
+  bg-no-repeat bg-center bg-cover transition-transform
+  ease-linear cursor-pointer inline-block ;
+  height: 100% !important;
+}
+
+.root:hover {
+  & .productImage {
+    transform: scale(1.2625);
+  }
+
+  & .header .name span,
+  & .header .price,
+  & .wishlistButton {
+    @apply text-sm;
+  }
+
+  &:nth-child(6n + 1) .header .name span,
+  &:nth-child(6n + 1) .header .price,
+  &:nth-child(6n + 1) .wishlistButton {
+    @apply bg-pink-600 text-white;
+  }
+
+  &:nth-child(6n + 5) .header .name span,
+  &:nth-child(6n + 5) .header .price,
+  &:nth-child(6n + 5) .wishlistButton {
+    @apply bg-blue-500 text-white;
+  }
+
+  &:nth-child(6n + 3) .header .name span,
+  &:nth-child(6n + 3) .header .price,
+  &:nth-child(6n + 3) .wishlistButton {
+    @apply bg-pink-500 text-white;
+  }
+
+  &:nth-child(6n + 6) .header .name span,
+  &:nth-child(6n + 6) .header .price,
+  &:nth-child(6n + 6) .wishlistButton {
+    @apply bg-indigo-500 text-white;
+  }
+}
+
+.header {
+  @apply transition-colors ease-in-out duration-500
+  absolute top-0 left-0 z-20 pr-16;
+}
+
+.header .name {
+  @apply pt-0 max-w-full w-full 
+  transition-colors ease-in-out duration-500;
+  font-size: 2rem;
+  letter-spacing: 0.4px;
+}
+
+.header .name span {
+  @apply py-4 px-6 font-bold
+  transition-colors ease-in-out duration-500;
+  font-size: inherit;
+  letter-spacing: inherit;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.header .price {
+  @apply pt-2 px-6 pb-4 text-sm 
+  font-semibold inline-block tracking-wide
+  transition-colors ease-in-out duration-500;
+}
+
+.imageContainer {
+  @apply flex items-center justify-center overflow-hidden;
+}
+
+.imageContainer > div {
+  min-width: 100%;
+}
+
+.imageContainer .productImage {
+  @apply transform transition-transform duration-500
+  object-cover scale-125;
+}
+
+.root .wishlistButton {
+  @apply top-0 right-0 z-30 absolute;
+}
+
+/* Variant Simple */
+.simple .header .name {
+  @apply pt-2 text-lg leading-10 -mt-1;
+}
+
+.simple .header .price {
+  @apply text-sm;
+}
+
+/* Variant Slim */
+.slim {
+  @apply bg-transparent relative overflow-hidden
+  box-border;
+}
+
+.slim .header {
+  @apply absolute inset-0 flex items-center justify-end mr-8 z-20;
+}
+
+.slim span {
+  @apply inline-block p-3
+  font-bold text-xl break-words;
+}
+
+.root:global(.secondary) .header span {
+
+}

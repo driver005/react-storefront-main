@@ -1,0 +1,85 @@
+import {
+  CheckoutLineDetailsFragment,
+  Maybe,
+  useRemoveProductFromCheckoutMutation,
+} from "../../../saleor/api";
+import React from "react";
+import Image from "next/image";
+export interface CheckoutProductListProps {
+  lines: Maybe<CheckoutLineDetailsFragment>[];
+  token: string;
+}
+
+export const CheckoutProductList: React.VFC<CheckoutProductListProps> = ({
+  lines,
+  token,
+}) => {
+  const [removeProductFromCheckout] = useRemoveProductFromCheckoutMutation();
+
+  return (
+    <ul
+      role="list"
+      className="flex-auto overflow-y-auto divide-y divide-gray-200 px-4"
+    >
+      {lines.map((line) => {
+        if (!line) {
+          return <></>;
+        }
+        return (
+          <li key={line.id} className="grid grid-cols-3 gap-4 py-4 space-x-4">
+            <div className="border bg-white w-32 h-32 object-center object-cover rounded-md relative">
+              <Image
+                src={line.variant.product.thumbnail?.url || ""}
+                alt={line.variant.product.thumbnail?.alt || ""}
+                layout="fill"
+              />
+            </div>
+
+            <div className="flex flex-col col-span-2 p-3 pl-0 w-full justify-between space-y-4">
+              <div className="text-sm font-bold space-y-1">
+                <div className="flex justify-between">
+                <h3 className="text-gray-900">{line.variant.product.name}</h3>
+                <p className="text-gray-900 justify-end">
+                  {line.totalPrice?.gross.localizedAmount}
+                  </p>
+                  </div>
+                <p className="text-gray-500">Gray</p>
+                <p className="text-gray-500">{line.variant.name}</p>
+              </div>
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  className="text-sm font-medium text-blue-600 border-r-2 pr-2 hover:text-blue-500"
+                  // onClick={() =>
+                  //   removeProductFromCheckout({
+                  //     variables: {
+                  //       checkoutToken: token,
+                  //       lineId: line.id,
+                  //     },
+                  //   })
+                  // }
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  className="text-sm font-medium text-blue-600 pl-2 hover:text-blue-500"
+                  onClick={() =>
+                    removeProductFromCheckout({
+                      variables: {
+                        checkoutToken: token,
+                        lineId: line.id,
+                      },
+                    })
+                  }
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
